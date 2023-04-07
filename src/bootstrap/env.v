@@ -14,10 +14,6 @@ pub:
 	client_url           string
 }
 
-/*
-* This doesn't work for now, it can't read the environment variavles from .env file.
-* TODO!: make a fcking parser or find a dotenv lib
-*/
 pub fn new_env() &Env {
 	vdotenv.load()
 
