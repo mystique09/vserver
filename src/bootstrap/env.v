@@ -1,6 +1,7 @@
 module bootstrap
 
 import os
+import zztkm.vdotenv
 
 pub struct Env {
 pub:
@@ -18,6 +19,8 @@ pub:
 * TODO!: make a fcking parser or find a dotenv lib
 */
 pub fn new_env() &Env {
+	vdotenv.load()
+
 	auth_secret := os.getenv_opt('AUTH_SECRET') or { 'thisismyauthsecret' }
 	db_url := os.getenv_opt('DATABASE_URL') or {
 		println('no db url')
