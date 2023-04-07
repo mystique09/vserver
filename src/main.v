@@ -6,9 +6,9 @@ fn main() {
 	env := bootstrap.new_env()
 	app := bootstrap.new_app(env)
 	defer {
-		app.stop_app()
+		app.stop()
 	}
 
-	app.start_app()
+	app.start()
 	println('Hello, world!')
 }

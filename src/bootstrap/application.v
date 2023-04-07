@@ -15,12 +15,12 @@ pub fn new_app(env &Env) &Application {
 	return &app
 }
 
-pub fn (app &Application) start_app() {
+pub fn (app &Application) start() {
 	app.db.connect()
 	println('Starting application...')
 }
 
-pub fn (app &Application) stop_app() {
+pub fn (app &Application) stop() {
 	app.db.disconnect()
 	println('Gracefully shutting down...')
 }
