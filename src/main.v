@@ -1,23 +1,14 @@
 module main
 
-import vweb
-
-struct App {
-	vweb.Context
-}
-
-fn new_app() &App {
-	mut app := &App{}
-	return app
-}
-
-['/']
-pub fn (mut app App) index() vweb.Result {
-	return app.text('Hello, World!')
-}
+import bootstrap
 
 fn main() {
-	vweb.run_at(new_app(), vweb.RunParams{
-		port: 8000
-	}) or { panic(err) }
+	env := bootstrap.new_env()
+	app := bootstrap.new_app(env)
+	defer {
+		app.stop_app()
+	}
+
+	app.start_app()
+	println('Hello, world!')
 }
