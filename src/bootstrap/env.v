@@ -23,10 +23,10 @@ pub fn new_env() &Env {
 
 	auth_secret := os.getenv_opt('AUTH_SECRET') or { 'thisismyauthsecret' }
 	db_username := os.getenv_opt('DB_USERNAME') or { 'root' }
-	db_pass := os.getenv_opt('DB_USERNAME') or { 'secret' }
-	db_host := os.getenv_opt('DB_USERNAME') or { 'localhost' }
-	db_port := os.getenv_opt('DB_USERNAME') or { '5432' }
-	db_name := os.getenv_opt('DB_USERNAME') or { 'vserver-db' }
+	db_pass := os.getenv_opt('DB_PASS') or { 'secret' }
+	db_host := os.getenv_opt('DB_HOST') or { 'localhost' }
+	db_port := os.getenv_opt('DB_PORT') or { '5432' }
+	db_name := os.getenv_opt('DB_NAME') or { 'vserver-db' }
 
 	host := os.getenv_opt('HOST') or { '0.0.0.0' }
 	port := os.getenv_opt('PORT') or { '8000' }
