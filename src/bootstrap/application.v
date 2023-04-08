@@ -7,7 +7,7 @@ pub:
 }
 
 pub fn new_app(env &Env) &Application {
-	db := new_db()
+	db := new_db(env)
 	app := Application{
 		env: env
 		db: db
@@ -16,7 +16,6 @@ pub fn new_app(env &Env) &Application {
 }
 
 pub fn (app &Application) start() {
-	app.db.connect()
 	println('Starting application...')
 }
 
