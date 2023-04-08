@@ -2,24 +2,18 @@ module bootstrap
 
 import db.pg
 
-// TODO!: connect to postgresql
 pub struct Database {
+pub:
 	conn pg.DB
 }
 
 pub fn new_db(env &Env) &Database {
-	config := pg.Config
-	{
-		host:
-		env.db_host
-		port:
-		env.db_port.int()
-		user:
-		env.db_username
-		password:
-		env.db_pass
-		dbname:
-		env.db_name
+	config := pg.Config{
+		host: env.db_host
+		port: env.db_port.int()
+		user: env.db_username
+		password: env.db_pass
+		dbname: env.db_name
 	}
 	conn := pg.connect(config) or { panic(err) }
 	db := Database{conn}
