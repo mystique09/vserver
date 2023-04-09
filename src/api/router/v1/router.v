@@ -3,6 +3,7 @@ module v1
 import vweb
 import os
 import db.pg
+import controller
 
 pub struct Router {
 	vweb.Controller
@@ -24,17 +25,9 @@ pub fn (mut router Router) index() vweb.Result {
 
 pub fn (mut router Router) setup_routes(db pg.DB) {
 	controllers := [
-		vweb.controller('/docs', &DocsController{}),
+		vweb.controller('/docs', controller.new_docs_controller()),
+		vweb.controller('/users', controller.new_user_controller()),
 	]
 	router.db = db
 	router.controllers = controllers
-}
-
-struct DocsController {
-	vweb.Context
-}
-
-['/']
-pub fn (mut docs DocsController) index() vweb.Result {
-	return docs.text('documentation for vserver')
 }
