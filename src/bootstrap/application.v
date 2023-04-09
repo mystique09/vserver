@@ -5,23 +5,26 @@ import vweb
 
 pub struct Application {
 pub:
-	env Env
-	db  Database
+	env   Env
+	db    Database
+	route v1.Router
 }
 
 pub fn new_app() &Application {
 	env := new_env()
 	db := new_db(env)
+	route := v1.new_router(db.conn)
 	app := Application{
 		env: env
 		db: db
+		route: route
 	}
 	return &app
 }
 
-pub fn (app &Application) start(route v1.Router) {
+pub fn (app &Application) start() {
 	println('Starting application...')
-	vweb.run_at(route, vweb.RunParams{
+	vweb.run_at(app.route, vweb.RunParams{
 		host: app.env.host
 		port: app.env.port.int()
 		family: .ip
