@@ -1,6 +1,7 @@
 module bootstrap
 
 import db.pg
+import domain
 
 pub struct Database {
 pub:
@@ -18,6 +19,15 @@ pub fn new_db(env &Env) &Database {
 	conn := pg.connect(config) or { panic(err) }
 	db := Database{conn}
 	return &db
+}
+
+pub fn (db &Database) auto_migrate() {
+	println('migrating database...')
+	sql db.conn {
+		create table domain.User
+		create table domain.Message
+	} or { println('error migrating: ${err}') }
+	println('migrated')
 }
 
 pub fn (db &Database) disconnect() {

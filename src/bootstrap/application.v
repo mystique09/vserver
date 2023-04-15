@@ -24,6 +24,7 @@ pub fn new_app() &Application {
 
 pub fn (app &Application) start() {
 	println('Starting application...')
+	app.db.auto_migrate()
 	vweb.run_at(app.route, vweb.RunParams{
 		host: app.env.host
 		port: app.env.port.int()
