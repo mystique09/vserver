@@ -9,7 +9,7 @@ pub struct Message {
 	content    string
 	seen       bool
 	created_at time.Time
-	updated_at time.Time [sql_type: 'DATETIME']
+	updated_at time.Time
 }
 
 pub struct CreateMessage {
@@ -18,7 +18,7 @@ pub struct CreateMessage {
 }
 
 pub interface IMessageRepository {
-	create_one(payload CreateMessage) !Message
+	create_one(payload &CreateMessage) !Message
 	get_one(id string) ?Message
 	get_many(limit int) ?[]Message
 	delete_one(id string) !Message

@@ -11,7 +11,7 @@ pub struct User {
 	profile    Profile   [fkey: 'id']
 	messages   []Message [fkey: 'user_id']
 	created_at time.Time
-	updated_at time.Time [sql_type: 'DATETIME']
+	updated_at time.Time
 }
 
 pub struct Profile {
@@ -26,8 +26,8 @@ pub struct CreateUser {
 }
 
 pub interface IUserRepository {
-	create_one(payload CreateUser) !User
+	create_one(payload &CreateUser) !User
 	get_one(id string) ?User
-	get_many(limit int) ?[]User
+	get_many(page int, limit int) ?[]User
 	delete_one(id string) !User
 }
