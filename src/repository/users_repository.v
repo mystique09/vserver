@@ -60,9 +60,9 @@ fn (repo &UserRepository) get_many(page int, lim int) ?[]domain.User {
 	return result
 }
 
-fn (repo &UserRepository) delete_one(id string) !domain.User {
+fn (repo &UserRepository) delete_one(user_id string) !domain.User {
 	result := sql repo.db {
-		delete from domain.User where id == id
-	} or { return error('unable to delete user: ${id} err: ${err}')}
+		delete from domain.User where id == user_id
+	} or { return error('unable to delete user: ${user_id} err: ${err}')}
 	return result
 }
