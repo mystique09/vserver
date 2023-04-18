@@ -3,7 +3,7 @@ module repository
 import domain
 import db.pg
 import rand
-// import crypto.bcrypt
+import crypto.bcrypt
 
 pub struct UserRepository {
 pub mut:
@@ -20,16 +20,14 @@ pub fn new_user_repo(mut db pg.DB) &domain.IUserRepository {
 pub fn (repo &UserRepository) create_one(payload &domain.CreateUser) !domain.User {
 	user_id := 1
 
-	// TODO: fix
-	/*
-	hashed_pass := bcrypt.generate_from_password(payload.password, bcrypt.default_cost) or {
+	hashed_pass := bcrypt.generate_from_password(payload.password.bytes(), bcrypt.default_cost) or {
 		return error('error hashing passord')
-	}*/
+	}
 
 	new_user := domain.User{
 		id: user_id
 		username: payload.username
-		password: payload.password
+		password: hashed_pass
 		email: payload.email
 		profile: domain.Profile{
 			id: user_id

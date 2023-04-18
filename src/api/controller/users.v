@@ -18,6 +18,12 @@ pub fn new_user_controller(mut db pg.DB) &UserController {
 	return &user_controller
 }
 
+['/register'; post]
+pub fn (mut user_controller UserController) register() vweb.Result {
+	// TODO!: get request data
+	return user_controller.text('register')
+}
+
 ['/users']
 pub fn (mut user_controller UserController) get_users() vweb.Result {
 	users := user_controller.user_usecase.get_many(0, 10) or { []domain.User{} }
