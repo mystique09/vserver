@@ -4,7 +4,7 @@ import time
 
 [table: 'users']
 pub struct User {
-	id         string    [nonull; primary; unique]
+	id         int       [nonull; primary; unique]
 	username   string    [nonull; unique]
 	password   string    [nonull]
 	email      string    [nonull; unique]
@@ -14,12 +14,14 @@ pub struct User {
 	updated_at time.Time
 }
 
+[table: 'profiles']
 pub struct Profile {
-	id   string [primary]
+	id   int    [nonnull; primary]
 	hash string
 }
 
 pub struct CreateUser {
+pub:
 	username string
 	password string
 	email    string
@@ -27,7 +29,12 @@ pub struct CreateUser {
 
 pub interface IUserRepository {
 	create_one(payload &CreateUser) !User
-	get_one(id string) ?User
+	get_one(id int) ?User
 	get_many(page int, limit int) ?[]User
-	delete_one(id string) !User
+}
+
+pub interface IUserUsecase {
+	create_one(payload &CreateUser) !User
+	get_one(id int) ?User
+	get_many(page int, limit int) ?[]User
 }
