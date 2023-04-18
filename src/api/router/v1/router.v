@@ -29,7 +29,7 @@ pub fn (mut router Router) index() vweb.Result {
 pub fn (mut router Router) setup_routes() {
 	controllers := [
 		vweb.controller('/docs', controller.new_docs_controller()),
-		vweb.controller('/api/v1/users', controller.new_user_controller()),
+		vweb.controller('/api/v1', controller.new_user_controller(mut &router.db)),
 	]
 	router.controllers = controllers
 }
