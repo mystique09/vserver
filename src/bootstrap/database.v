@@ -25,6 +25,7 @@ pub fn (db &Database) auto_migrate() {
 	println('migrating database...')
 	sql db.conn {
 		create table domain.User
+		create table domain.Profile
 		create table domain.Message
 	} or { println('error migrating: ${err}') }
 	println('migrated')
