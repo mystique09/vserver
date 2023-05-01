@@ -16,17 +16,19 @@ pub fn new_router(db pg.DB) &Router {
 	mut router := Router{
 		db: db
 	}
-	router.mount_static_folder_at(os.resource_abs_path('.'), '/')
-	router.setup_routes()
 	return &router
 }
 
 ['/']
 pub fn (mut router Router) index() vweb.Result {
-	return router.text('hello, world')
+	title := 'vweb app'
+	return router.text('hsh')
+
+	// return $vweb.html()
 }
 
 pub fn (mut router Router) setup_routes() {
+	router.mount_static_folder_at(os.resource_abs_path('src/templates'), '/')
 	controllers := [
 		vweb.controller('/docs', controller.new_docs_controller()),
 		vweb.controller('/api/v1', controller.new_user_controller(mut &router.db)),

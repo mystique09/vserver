@@ -2,11 +2,13 @@ module bootstrap
 
 import api.router.v1
 import vweb
+import os
 
 pub struct Application {
 pub:
-	env   Env
-	db    Database
+	env Env
+	db  Database
+pub mut:
 	route v1.Router
 }
 
@@ -22,9 +24,12 @@ pub fn new_app() &Application {
 	return &app
 }
 
-pub fn (app &Application) start() {
+pub fn (mut app Application) start() {
 	println('Starting application...')
+
 	app.db.auto_migrate()
+	app.route.setup_routes()
+
 	vweb.run_at(app.route, vweb.RunParams{
 		host: app.env.host
 		port: app.env.port.int()
