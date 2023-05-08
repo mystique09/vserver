@@ -2,7 +2,6 @@ module bootstrap
 
 import api.router.v1
 import vweb
-import os
 
 pub struct Application {
 pub:

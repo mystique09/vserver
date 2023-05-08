@@ -21,14 +21,13 @@ pub fn new_router(db pg.DB) &Router {
 
 ['/']
 pub fn (mut router Router) index() vweb.Result {
-	title := 'vweb app'
-	return router.text('hsh')
-
-	// return $vweb.html()
+	title := 'vweb basic app'
+	content := $tmpl('../../../templates/pages/index.html')
+	return router.html(content)
 }
 
 pub fn (mut router Router) setup_routes() {
-	router.mount_static_folder_at(os.resource_abs_path('src/templates'), '/')
+	router.mount_static_folder_at(os.resource_abs_path('../../../templates'), '/')
 	controllers := [
 		vweb.controller('/docs', controller.new_docs_controller()),
 		vweb.controller('/api/v1', controller.new_user_controller(mut &router.db)),
